@@ -6,7 +6,7 @@
 		<groupId>com.github.jsonld-java</groupId>
 		<!--    The "moesol-N" portion of the version indicates that
 			this is a fork managed by https://github.com/MoebiusSolutions/jsonld-java -->
-		<version>0.10.1-moesol-1-SNAPSHOT</version>
+		<version>0.10.1-moesol-1</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>jsonld-java</artifactId>
