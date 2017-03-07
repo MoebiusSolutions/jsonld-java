@@ -12,7 +12,7 @@ public class JsonLdOptions {
 
     public static final boolean DEFAULT_COMPACT_ARRAYS = true;
 
-	/**
+    /**
      * Constructs an instance of JsonLdOptions using an empty base.
      */
     public JsonLdOptions() {
@@ -65,6 +65,13 @@ public class JsonLdOptions {
     Boolean useRdfType = false;
     Boolean useNativeTypes = false;
     private boolean produceGeneralizedRdf = false;
+
+    // Misc options
+
+    /**
+     * @see {@link #doFailOnUnrecognizedProperties()}
+     */
+    private boolean failOnUnrecognizedProperties = false;
 
     public Boolean getEmbed() {
         return embed;
@@ -152,6 +159,37 @@ public class JsonLdOptions {
 
     public void setDocumentLoader(DocumentLoader documentLoader) {
         this.documentLoader = documentLoader;
+    }
+
+    /**
+	 * Whether an exception should be thrown when unrecognized properties are
+	 * encountered in the JSONLD structure.
+	 *
+	 * <p>
+	 * The JSONLD API states: <i>If expanded property is null or it neither
+	 * contains a colon (:) nor it is a keyword, drop key by continuing to the
+	 * next key.</i>
+	 * </p>
+	 *
+	 * <p>
+	 * However, a user may wish for processing to fail in the event that a
+	 * property is not accounted for in the context. This option enables an
+	 * exception in that case.
+	 * </p>
+	 *
+	 * <p>
+	 * Source: https://www.w3.org/TR/json-ld-api/#expansion-algorithms : [7.3]
+	 * </p>
+	 */
+    public boolean doFailOnUnrecognizedProperties() {
+        return failOnUnrecognizedProperties;
+    }
+
+    /**
+     * @see {@link #doFailOnUnrecognizedProperties()}
+     */
+    public void setFailOnUnrecognizedProperties(boolean doFail) {
+        this.failOnUnrecognizedProperties = doFail;
     }
 
     // TODO: THE FOLLOWING ONLY EXIST SO I DON'T HAVE TO DELETE A LOT OF CODE,

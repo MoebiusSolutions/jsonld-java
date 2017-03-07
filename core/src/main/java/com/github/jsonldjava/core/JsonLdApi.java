@@ -559,7 +559,12 @@ public class JsonLdApi {
                 // 7.3)
                 if (expandedProperty == null
                         || (!expandedProperty.contains(":") && !isKeyword(expandedProperty))) {
-                    continue;
+                    if (opts.doFailOnUnrecognizedProperties()) {
+                        throw new JsonLdError(Error.INVALID_INPUT,
+                                String.format("property [%s] was recognized", key));
+                    } else {
+                        continue;
+                    }
                 }
                 // 7.4)
                 if (isKeyword(expandedProperty)) {
